@@ -1,0 +1,29 @@
+[issues]
+exclude-use-default = false
+
+[linters]
+enable = [
+  "govet",
+  "staticcheck",
+  "gosimple",
+  "structcheck",
+  "ineffassign",
+  "typecheck",
+  "bodyclose",
+  "golint",
+  "stylecheck",
+  "gosec",
+  "interfacer",
+  "unconvert",
+  "goconst",
+  "gofmt",
+  "goimports",
+  "maligned",
+  "depguard",
+  "misspell",
+  "unparam",
+  "nakedret",
+  "prealloc",
+  "scopelint",
+  "gocritic",
+]
