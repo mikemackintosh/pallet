@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"cloud.google.com/go/logging"
 	"github.com/go-chi/chi"
 	"github.com/mikemackintosh/pallet"
 )
@@ -38,6 +39,9 @@ func main() {
 // handler is a sample route
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
+
+	logger := pallet.GetLoggerFromRequest(r)
+	logger.Logf(logging.Warning, "url: %+v", r.URL.Path)
 
 	_, err := w.Write([]byte("{\"status\": \"ok\"}"))
 	if err != nil {

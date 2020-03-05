@@ -4,8 +4,6 @@ import (
 	"context"
 	"log"
 	"net/http"
-
-	"cloud.google.com/go/logging"
 )
 
 // contextyKey is used to set context keys.
@@ -38,14 +36,19 @@ func CloudTraceContextMiddleware(next http.Handler) http.Handler {
 }
 */
 
+// GetLoggerFromRequest returns the loggnig.Client from the context.
+func GetLoggerFromRequest(r *http.Request) *Logger {
+	return GetLoggerFromContext(r.Context())
+}
+
 // GetLoggerFromContext returns the XCloudTraceContent value from the context.
-func GetLoggerFromContext(ctx context.Context) *logging.Client {
+func GetLoggerFromContext(ctx context.Context) *Logger {
 	if ctx != nil {
-		if client, ok := ctx.Value(ContextLoggingClient).(*logging.Client); ok {
+		if client, ok := ctx.Value(ContextLoggingClient).(*Logger); ok {
 			return client
 		}
 	}
-	return &logging.Client{}
+	return &Logger{}
 }
 
 // Flush will flush the active logger.
