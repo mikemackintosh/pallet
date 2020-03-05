@@ -42,4 +42,5 @@ The following packages, posts and projects have influenced this project:
  - https://medium.com/google-cloud/combining-correlated-log-lines-in-google-stackdriver-dd23284aeb29
  - https://github.com/andyfusniak/stackdriver-gae-logrus-plugin
  - https://medium.com/google-cloud/using-stackdriver-with-golang-on-istio-2ccbe00bbcd8
-  - Logo from https://www.svgrepo.com/svg/234344/pallet 
+ - Logo from https://www.svgrepo.com/svg/234344/pallet 
+ - https://github.com/mtraver/gaelog/blob/master/gaelog.go
