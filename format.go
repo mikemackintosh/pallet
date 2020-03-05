@@ -16,13 +16,15 @@ func (l *Logger) Logf(severity logging.Severity, format string, v ...interface{}
 	}
 
 	monRes := *l.MonitoredResource
-
-	l.Logger.Log(logging.Entry{
+	entry := logging.Entry{
 		Timestamp: time.Now(),
 		Severity:  severity,
 		Payload:   fmt.Sprintf(format, v...),
 		Resource:  &monRes,
-	})
+	}
+	fmt.Printf("entry: %#v\n", entry)
+
+	l.Logger.Log(entry)
 }
 
 // Log logs with the given severity. v must be either a string, or something that
@@ -35,13 +37,15 @@ func (l *Logger) Log(severity logging.Severity, v interface{}) {
 	}
 
 	monRes := *l.MonitoredResource
-
-	l.Logger.Log(logging.Entry{
+	entry := logging.Entry{
 		Timestamp: time.Now(),
 		Severity:  severity,
 		Payload:   v,
 		Resource:  &monRes,
-	})
+	}
+	fmt.Printf("entry: %#v\n", entry)
+
+	l.Logger.Log(entry)
 }
 
 // Debugf calls Logf with debug severity.

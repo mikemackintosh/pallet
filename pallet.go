@@ -40,19 +40,21 @@ type Logger struct {
 
 // Options are used to configure a client.
 type Options struct {
-	ProjectID string
-	ServiceID string
-	VersionID string
-	LogType   string
-	Labels    map[string]string
+	ProjectID  string
+	ServiceID  string
+	VersionID  string
+	InstanceID string
+	LogType    string
+	Labels     map[string]string
 }
 
 // NewOptionSet will create a new optionset, passed to the client.
 func NewOptionSet() *Options {
 	return &Options{
-		ServiceID: "default",
-		VersionID: "default",
-		LogType:   "gae_app",
+		ServiceID:  "default",
+		VersionID:  "default",
+		InstanceID: "default",
+		LogType:    "gae_app",
 	}
 }
 
@@ -69,6 +71,11 @@ func (o *Options) SetService(s string) {
 // SetVersion will set a verson
 func (o *Options) SetVersion(v string) {
 	o.VersionID = v
+}
+
+// SetInstanceID will set an instance
+func (o *Options) SetInstanceID(i string) {
+	o.InstanceID = i
 }
 
 // SetLabels will set labels.
@@ -105,9 +112,10 @@ func NewLoggerForRequest(r *http.Request, options *Options, loggingOptions ...lo
 
 	monRes := &monitoredres.MonitoredResource{
 		Labels: map[string]string{
-			"project_id": options.ProjectID,
-			"module_id":  options.ServiceID,
-			"version_id": options.VersionID,
+			"project_id":  options.ProjectID,
+			"module_id":   options.ServiceID,
+			"version_id":  options.VersionID,
+			"instance_id": options.InstanceID,
 		},
 		Type: options.LogType,
 	}
